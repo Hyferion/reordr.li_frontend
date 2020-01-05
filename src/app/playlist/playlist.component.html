@@ -1,0 +1,43 @@
+<p>
+  <button class="btn btn-primary" (click)="goToPlaylistOverview()">Back</button>
+</p>
+
+<div class="table-responsive">
+  <div class="motto text-center">
+  <h2> Playlist {{playlist.name}}</h2>
+  <p> Choose a Song on which you would like to shuffle your playlist on. The songs will be sorted after familiarity to the reference song.
+  That means the song which is most similar with the reference song will be second, second most similar will be third etc.</p>
+  </div>
+  <div class="motto text-center" style="margin: 50px;">
+    <button class="btn btn-primary" (click)="shuffle()"> Shuffle!</button>
+  </div>
+
+
+
+  <table class="table table-dark table-striped" *ngIf="!shuffling">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Added at</th>
+      <th>Added by</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let track of playlistTracks" (click)="selectedTrack = track"
+        [ngStyle]="{'background-color': selectedTrack.spotifyId === track.spotifyId ? '#34b4b8' : ''}" >
+      <td><img width="200px" height="200px" src="{{track.img}}"></td>
+      <td>{{track.title}}</td>
+      <td>{{track.artist}}</td>
+      <td>{{track.added_at}}</td>
+      <td>{{track.added_by}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="motto text-center" *ngIf="shuffling">
+    Currently Shuffling, Please wait...
+  </div>
+</div>
